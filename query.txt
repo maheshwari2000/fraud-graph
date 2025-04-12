@@ -1,0 +1,9 @@
+query1 ="""
+MATCH path=(:User {id: "User_23"})-[:HAS_UID1|HAS_UID2*..4]-(connected:User)
+WHERE ALL(r IN relationships(path) WHERE type(r) in ['HAS_UID1', 'HAS_UID2'])
+  AND length(path) > 0
+  AND connected.id <> "User_23"
+RETURN connected, length(path) AS connectionDistance
+ORDER BY connectionDistance
+"""
+
